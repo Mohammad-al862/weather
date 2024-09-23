@@ -1,0 +1,35 @@
+<!-- weather/templates/weather/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        form { margin: 20px 0; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Weather Report</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="city">Enter city name:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">Get Weather</button>
+    </form>
+
+    {% if city_name %}
+        <h2>Weather in {{ city_name }}, {{ country }}</h2>
+        <p>Temperature: {{ temperature }}°C</p>
+        <p>Description: {{ description }}</p>
+        <p>humidity: {{ humidity }}</p>
+        <p>sea_level: {{ sea_level }}</p>
+       
+    {% elif error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
